@@ -1,21 +1,20 @@
 import React, { Component } from "react";
 import { v4 as uuidv4 } from "uuid";
 
+import s from "./App.module.css";
 import Container from "../Container";
 import ContactForm from "../ContactForm";
 import ContactList from "../ContactList/";
 import Filter from "../Filter";
 
-import "./App.css";
 class App extends Component {
   state = {
     contacts: [],
     filter: "",
   };
 
-  checkName = (newName) => {
-    return this.state.contacts.find(({ name }) => name === newName);
-  };
+  checkName = (newName) =>
+    this.state.contacts.find(({ name }) => name === newName);
 
   addContact = ({ name, number }) => {
     if (!this.checkName(name)) {
@@ -53,18 +52,18 @@ class App extends Component {
   };
 
   render() {
-    const { filter } = this.state;
+    const { filter, contacts } = this.state;
     const filteredContacts = this.getFilteredContacts();
 
     return (
       <>
         <Container>
-          <h1>Phonebook</h1>
+          <h1 className={s.title}>Phonebook</h1>
           <ContactForm onSubmit={this.addContact} />
         </Container>
-        {this.state.contacts.length > 0 ? (
+        {contacts.length > 0 ? (
           <Container>
-            <h2>Contacts</h2>
+            <h2 className={s.title}>Contacts</h2>
             <Filter value={filter} onChange={this.changeFilter} />
             <ContactList
               contactList={filteredContacts}
@@ -72,7 +71,9 @@ class App extends Component {
             />
           </Container>
         ) : (
-          <h2>phone book is empty</h2>
+          <Container>
+            <h2 className={s.title}>Phone book is empty</h2>
+          </Container>
         )}
       </>
     );

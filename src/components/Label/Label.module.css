@@ -1,0 +1,7 @@
+.label {
+  display: flex;
+  flex-direction: column;
+}
+.label:not(:first-child) {
+  margin-top: 20px;
+}
